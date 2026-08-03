@@ -1,5 +1,5 @@
 // Copyright 2011-2020 the Polygon Mesh Processing Library developers.
-// Distributed under a MIT-style license, see LICENSE.txt for details.
+// SPDX-License-Identifier: MIT
 
 #pragma once
 
@@ -32,7 +32,8 @@ public:
     {
         using std::chrono::duration_cast;
         end_time_ = hclock::now();
-        duration time_span = duration_cast<duration>(end_time_ - start_time_);
+        const duration time_span =
+            duration_cast<duration>(end_time_ - start_time_);
         elapsed_ += time_span.count();
         is_running_ = false;
         return *this;

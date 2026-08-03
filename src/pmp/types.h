@@ -1,5 +1,5 @@
 // Copyright 2011-2021 the Polygon Mesh Processing Library developers.
-// Distributed under a MIT-style license, see LICENSE.txt for details.
+// SPDX-License-Identifier: MIT
 
 #pragma once
 
@@ -59,8 +59,8 @@ using IndexType = std::uint_least32_t;
 //! \defgroup algorithms algorithms
 //! \brief Mesh processing algorithms.
 
-//! \defgroup visualization visualization
-//! \brief Visualization tools using OpenGL.
+//! \defgroup viewers viewers
+//! \brief Viewers using OpenGL.
 
 //! \defgroup io io
 //! Read and write common mesh formats.

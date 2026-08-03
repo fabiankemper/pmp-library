@@ -1,5 +1,5 @@
 // Copyright 2011-2020 the Polygon Mesh Processing Library developers.
-// Distributed under a MIT-style license, see LICENSE.txt for details.
+// SPDX-License-Identifier: MIT
 
 #include "pmp/algorithms/hole_filling.h"
 
@@ -590,7 +590,7 @@ void HoleFilling::fairing()
         return;
 
     // convert non-locked into selection
-    bool add_vsel = !mesh_.has_vertex_property("v:selected");
+    const bool add_vsel = !mesh_.has_vertex_property("v:selected");
     auto vsel = mesh_.vertex_property<bool>("v:selected");
     for (auto v : mesh_.vertices())
         vsel[v] = !vlocked_[v];

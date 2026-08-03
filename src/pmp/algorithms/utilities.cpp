@@ -1,5 +1,5 @@
 // Copyright 2022 the Polygon Mesh Processing Library developers.
-// Distributed under a MIT-style license, see LICENSE.txt for details.
+// SPDX-License-Identifier: MIT
 
 #include "pmp/algorithms/utilities.h"
 #include "pmp/algorithms/differential_geometry.h"
@@ -57,6 +57,14 @@ Scalar mean_edge_length(const SurfaceMesh& mesh)
     return length;
 }
 
+Scalar min_edge_length(const SurfaceMesh& mesh)
+{
+    Scalar min_length = std::numeric_limits<Scalar>::max();
+    for (auto e : mesh.edges())
+        min_length = std::min(min_length, edge_length(mesh, e));
+    return min_length;
+}
+
 int connected_components(SurfaceMesh& mesh)
 {
     auto component = mesh.vertex_property<int>("v:component");
@@ -72,17 +80,17 @@ int connected_components(SurfaceMesh& mesh)
             continue;
 
         std::queue<Vertex> vertices;
+        component[v] = idx;
         vertices.push(v);
 
         while (!vertices.empty())
         {
             auto vv = vertices.front();
             vertices.pop();
-            component[vv] = idx;
 
             for (auto vc : mesh.vertices(vv))
             {
-                if (component[vc] != idx)
+                if (component[vc] == -1)
                 {
                     component[vc] = idx;
                     vertices.push(vc);

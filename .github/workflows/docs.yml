@@ -20,21 +20,21 @@ jobs:
       # - name: Fetch doxygen
       #   run: export DOXYGEN_URL="https://github.com/doxygen/doxygen/releases/download/Release_1_9_6/doxygen-1.9.6.linux.bin.tar.gz" && mkdir doxygen && wget -O - ${DOXYGEN_URL} | tar --strip-components=1 -xz -C doxygen && echo `pwd`/doxygen/bin >> $GITHUB_PATH
 
-      - name: Create doxygen build directory
-        run: cmake -E make_directory ${{runner.workspace}}/doxybuild
+      # - name: Create doxygen build directory
+      #   run: cmake -E make_directory ${{runner.workspace}}/doxybuild
 
-      - name: Build doxygen
-        shell: bash
-        working-directory: ${{runner.workspace}}/doxybuild
-        run: |
-          git clone https://github.com/doxygen/doxygen.git
-          cd doxygen
-          git checkout Release_1_9_6
-          mkdir build
-          cd build
-          cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=${{runner.workspace}}/doxygen ..
-          make -j2 install
-          echo ${{runner.workspace}}/doxygen/bin >> $GITHUB_PATH
+      # - name: Build doxygen
+      #   shell: bash
+      #   working-directory: ${{runner.workspace}}/doxybuild
+      #   run: |
+      #     git clone https://github.com/doxygen/doxygen.git
+      #     cd doxygen
+      #     git checkout Release_1_9_6
+      #     mkdir build
+      #     cd build
+      #     cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=${{runner.workspace}}/doxygen ..
+      #     make -j2 install
+      #     echo ${{runner.workspace}}/doxygen/bin >> $GITHUB_PATH
 
       - name: Create emscripten build directory
         run: cmake -E make_directory ${{runner.workspace}}/embuild
@@ -52,7 +52,7 @@ jobs:
       - name: Configure emscripten
         shell: bash
         working-directory: ${{runner.workspace}}/embuild
-        run: source ./emsdk/emsdk_env.sh && emcmake cmake $GITHUB_WORKSPACE
+        run: source ./emsdk/emsdk_env.sh && emcmake cmake -DPMP_BUILD_EXAMPLES=ON $GITHUB_WORKSPACE
 
       - name: Build emscripten
         working-directory: ${{runner.workspace}}/embuild
@@ -62,10 +62,10 @@ jobs:
       - name: Create build directory
         run: cmake -E make_directory ${{runner.workspace}}/build
 
-      - name: Configure CMkae
+      - name: Configure CMake
         shell: bash
         working-directory: ${{runner.workspace}}/build
-        run: cmake -DPMP_BUILD_VIS=OFF $GITHUB_WORKSPACE
+        run: cmake -DPMP_BUILD_DOCS=ON -DPMP_BUILD_VIEWERS=OFF $GITHUB_WORKSPACE
 
       - name: Build docs
         working-directory: ${{runner.workspace}}/build

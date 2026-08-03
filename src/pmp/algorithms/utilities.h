@@ -1,5 +1,5 @@
 // Copyright 2022 the Polygon Mesh Processing Library developers.
-// Distributed under a MIT-style license, see LICENSE.txt for details.
+// SPDX-License-Identifier: MIT
 
 #pragma once
 
@@ -30,7 +30,11 @@ inline Scalar edge_length(const SurfaceMesh& mesh, Edge e)
 //! Compute mean edge length of \p mesh .
 Scalar mean_edge_length(const SurfaceMesh& mesh);
 
+//! Compute minimum edge length of \p mesh .
+Scalar min_edge_length(const SurfaceMesh& mesh);
+
 //! Compute connected components in \p mesh .
+//! \details Components are determined based on vertex adjacency. Isolated vertices are reported as connected components.
 //! \return the number of connected components.
 //! \post Adds a new vertex property \c v:component containing the component index.
 int connected_components(SurfaceMesh& mesh);

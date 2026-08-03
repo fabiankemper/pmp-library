@@ -1,5 +1,5 @@
 // Copyright 2011-2020 the Polygon Mesh Processing Library developers.
-// Distributed under a MIT-style license, see LICENSE.txt for details.
+// SPDX-License-Identifier: MIT
 
 #include "pmp/algorithms/smoothing.h"
 #include "pmp/algorithms/differential_geometry.h"
@@ -23,7 +23,7 @@ void explicit_smoothing(SurfaceMesh& mesh, unsigned int iterations,
     // normalize each row by sum of weights
     // scale by 0.5 to make it more robust
     // multiply by -1 to make it neg. definite again
-    DiagonalMatrix D = -0.5 * L.diagonal().asDiagonal().inverse();
+    const DiagonalMatrix D = -0.5 * L.diagonal().asDiagonal().inverse();
     L = D * L;
 
     // cancel out boundary vertices

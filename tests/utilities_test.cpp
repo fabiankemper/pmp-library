@@ -1,5 +1,5 @@
 // Copyright 2017-2021 the Polygon Mesh Processing Library developers.
-// Distributed under a MIT-style license, see LICENSE.txt for details.
+// SPDX-License-Identifier: MIT
 
 #include "gtest/gtest.h"
 
@@ -52,6 +52,13 @@ TEST_F(UtilitiesTest, mean_edge_length)
     add_quad();
     auto mean = mean_edge_length(mesh);
     EXPECT_EQ(mean, 1);
+}
+
+TEST_F(UtilitiesTest, min_edge_length)
+{
+    add_quad();
+    auto min = min_edge_length(mesh);
+    EXPECT_EQ(min, 1);
 }
 
 TEST_F(UtilitiesTest, connected_components)

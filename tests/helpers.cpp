@@ -1,16 +1,11 @@
 // Copyright 2021 the Polygon Mesh Processing Library developers.
-// Distributed under a MIT-style license, see LICENSE.txt for details.
+// SPDX-License-Identifier: MIT
 
 #include "helpers.h"
 
 #include "pmp/algorithms/shapes.h"
-#include "pmp/algorithms/features.h"
-#include "pmp/algorithms/subdivision.h"
-#include "pmp/algorithms/triangulation.h"
 
 namespace pmp {
-
-static SurfaceMesh icosahedron_mesh;
 
 SurfaceMesh vertex_onering()
 {
@@ -61,25 +56,6 @@ SurfaceMesh edge_onering()
     mesh.add_triangle(v9, v5, v6);
 
     return mesh;
-}
-
-SurfaceMesh subdivided_icosahedron()
-{
-    if (icosahedron_mesh.is_empty())
-    {
-        // use ref for brevity
-        auto& mesh = icosahedron_mesh;
-        mesh = icosahedron();
-
-        // select all edges as features
-        detect_features(mesh, 25);
-
-        // feature-preserving subdivision
-        loop_subdivision(mesh);
-        loop_subdivision(mesh);
-        loop_subdivision(mesh);
-    }
-    return icosahedron_mesh;
 }
 
 SurfaceMesh l_shape()
@@ -185,6 +161,33 @@ SurfaceMesh texture_seams_mesh()
             texcoords[h] += TexCoord(0.1, 0.1);
         }
     }
+
+    return mesh;
+}
+
+SurfaceMesh non_manifold_vertex()
+{
+    SurfaceMesh mesh;
+
+    auto v0 =
+        mesh.add_vertex(Point(-29.0949001312, 8.4453096390, -28.9988002777));
+    auto v1 =
+        mesh.add_vertex(Point(-28.4589996338, 9.1415996552, -24.3209991455));
+    auto v2 =
+        mesh.add_vertex(Point(-28.3157997131, 8.9296903610, -27.7917995453));
+    auto v3 =
+        mesh.add_vertex(Point(-28.9316005707, 10.9441995621, -28.3845005035));
+    auto v4 =
+        mesh.add_vertex(Point(-28.5000000000, 9.1328096390, -28.0953998566));
+    auto v5 =
+        mesh.add_vertex(Point(-28.6875000000, 8.5124998093, -24.4297008514));
+    auto v6 =
+        mesh.add_vertex(Point(-28.7500000000, 8.5000000000, -28.2500000000));
+
+    mesh.add_triangle(v3, v0, v6);
+    mesh.add_triangle(v1, v4, v6);
+    mesh.add_triangle(v3, v6, v2);
+    mesh.add_triangle(v1, v6, v5);
 
     return mesh;
 }

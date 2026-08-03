@@ -1,5 +1,5 @@
 // Copyright 2021 the Polygon Mesh Processing Library developers.
-// Distributed under a MIT-style license, see LICENSE.txt for details.
+// SPDX-License-Identifier: MIT
 
 #pragma once
 
@@ -13,11 +13,6 @@ SurfaceMesh vertex_onering();
 // generate onering around an edge
 SurfaceMesh edge_onering();
 
-// generate subdivided icosahedron
-// based on Loop subdivision
-// original icosahedron edges are marked as feature edges
-SurfaceMesh subdivided_icosahedron();
-
 // generate 2d non-convex L shape
 SurfaceMesh l_shape();
 
@@ -26,5 +21,8 @@ SurfaceMesh open_cone();
 
 // a mesh with texcoords and texture seams
 SurfaceMesh texture_seams_mesh();
+
+// a mesh with a non-manifold vertex
+SurfaceMesh non_manifold_vertex();
 
 } // namespace pmp

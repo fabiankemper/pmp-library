@@ -1,5 +1,5 @@
 // Copyright 2011-2022 the Polygon Mesh Processing Library developers.
-// Distributed under a MIT-style license, see LICENSE.txt for details.
+// SPDX-License-Identifier: MIT
 
 #include "pmp/io/read_off.h"
 #include <bit>
@@ -110,7 +110,7 @@ void read_off_ascii(SurfaceMesh& mesh, FILE* in, const bool has_normals,
                     char* first_line)
 {
     std::array<char, 1000> line;
-    char* lp = first_line;
+    char* lp = first_line; // NOLINT(misc-const-correctness)
     int nc;
     long int i, j, idx;
     long int nv, nf, ne;

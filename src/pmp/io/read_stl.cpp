@@ -1,5 +1,5 @@
 // Copyright 2011-2022 the Polygon Mesh Processing Library developers.
-// Distributed under a MIT-style license, see LICENSE.txt for details.
+// SPDX-License-Identifier: MIT
 
 #include "pmp/io/read_stl.h"
 
@@ -151,13 +151,12 @@ void read_stl(SurfaceMesh& mesh, const std::filesystem::path& file)
     // parse ASCII STL
     else
     {
-        char* c{nullptr};
-
         // parse line by line
         while (in && !feof(in) && fgets(line.data(), 100, in))
         {
             // skip white-space
-            for (c = line.data(); isspace(*c) && *c != '\0'; ++c)
+            char* c = line.data(); // NOLINT(misc-const-correctness)
+            for (; isspace(*c) && *c != '\0'; ++c)
             {
             };
 
